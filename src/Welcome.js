@@ -2,10 +2,10 @@ import React from 'react';
 
 function Welcome(props) {
    return (
-      <div className="Welcome">
+      <div className="Welcome vbox">
          <h1>WeatherApp</h1>
          <div className="stage">
-            <div id="logo" className="bounce"></div>
+            <div id="logo" className="icon bounce"></div>
          </div>
          {
             props.message ? (

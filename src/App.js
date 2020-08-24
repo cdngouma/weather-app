@@ -7,6 +7,7 @@ import Welcome from './Welcome';
 function App() {
    const [location, setLocation] = React.useState();
    const [weather, setWeather] = React.useState();
+   const [updatedAt, setUpdatedAt] = React.useState();
    const [errorMessage, setErrorMessage] = React.useState();
 
    React.useEffect(getLocation, []);
@@ -47,24 +48,56 @@ function App() {
             weatherData["humidity"] = Math.round(data.main.humidity * 10) / 10;
             weatherData["windSpeed"] = Math.round(data.wind.speed * 10) / 10;
             weatherData["visibility"] = Math.round(data.visibility * 10) / 10;
-            weatherData["iconPath"] = getIcon(data.weather[0].main, data.weather[0].description);
+            weatherData["iconPath"] = getIconClass(data.weather[0].main, data.weather[0].description);
 
             setWeather(weatherData);
+
+            setUpdatedAt(getCurrentDatetime());
          })
          .catch((error) => {
             setErrorMessage("Failed to get weather");
          });
    }
 
-   function getIcon(main, desc) {
-      const root = "C:/Users/ngoum/Documents/coding/web_development/weather-app/public/icons/";
-      switch (main) {
-         case "Clouds":
-            return root + "clouds.png";
-         case "Clear":
-            return root + "sun.png";
+   function getCurrentDatetime() {
+      const today = new Date();
+      let dd = today.getDate();
+      let mm = today.getMonth()+1;
+      let yyyy = today.getFullYear();
+      let h = today.getHours();
+      let m = today.getMinutes();
+      let meridiam = 'AM';
+
+      if(m < 10) {
+         m = '0'+m;
+      }
+      
+      if(h > 12) {
+         h = h%12;
+         meridiam = 'PM';
+      }
+
+      return `${mm}/${dd}/${yyyy} ${h}:${m} ${meridiam}`;
+   }
+
+   function getIconClass(desc, detail) {
+      console.log(desc, detail);
+      desc = desc.toLowerCase();
+      switch (desc) {
+         case "clouds":
+            return "icons-cloudy";
+         case "clear":
+            return "icons-sunny";
+         case "rain":
+            return "icons-rainy-2";
+         case "snow":
+            return "icons-snowy";
+         case "thunderstorm":
+            return "icons-stormy";
+         case "drizzle":
+            return "icons-rainy";
          default:
-            return root + "no-cloud";
+            return "icons-cloudy-2";
       }
    }
 
@@ -72,12 +105,19 @@ function App() {
       <div className="App">
          {
             !location || !weather || errorMessage ? (
-               <Welcome message={errorMessage} />
+               <Welcome message={ errorMessage } />
             ) : (
-               <Weather location={location} />
+               <Weather location={ location }
+                        iconClass={ weather.iconPath } 
+                        desc={ weather.description}
+                        temp={ weather.temp }
+                        humidity={ weather.humidity }
+                        windSpeed={ weather.windSpeed }
+                        visibility={ weather.visibility }
+                        updatedAt={ updatedAt } />
             )
          }
-         <p id="author">Coded By <a href="https://github.com/cdngouma" target="blank_">cdngouma</a>.</p>
+         <p id="author">Coded by <a href="https://github.com/cdngouma" target="blank_">cdngouma</a>.</p>
       </div>
    );
 }

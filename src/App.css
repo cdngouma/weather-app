@@ -6,7 +6,7 @@
    align-items: center;
    width: 100%;
    height: 100vh;
-   color: #fff;
+   color: #d5d5d5;
 }
 
 #author a {
@@ -16,31 +16,50 @@
 
 .Welcome, .Weather {
    background-color: #131521;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
+   width: 400px;
+   height: 350px;
+   padding: 50px;
    align-items: center;
-   width: 550px;
-   height: 450px;
+}
+
+.Welcome {
+   justify-content: center;
+}
+
+.Weather {
+   justify-content: flex-end;
 }
 
 .stage {
    height: 170px;
    display: flex;
    justify-content: center;
-   margin: 20px auto 20px auto;
+   margin: 20px auto 10px auto;
 }
 
 #logo {
-   width: 170px;
-   height: 170px;
-   align-self: flex-end;
-   background: url(./cloud-sun.png) center no-repeat;
-   background-size: 55%;
+   width: 140px;
+   height: 140px;
+   background: url("./icons/icons-cloudy.svg");
    animation-iteration-count: infinite;
    animation-duration: 1.5s;
-   transform-origin: bottom;
+   background-size: 100%;
 }
+
+#logo, #weather-icon {
+   filter: brightness(195%) !important;
+}
+
+.icon {
+   background-position: center;
+   background-repeat: no-repeat;
+   filter: invert(34%) 
+         sepia(11%) 
+         saturate(958%)
+         hue-rotate(172deg)
+         brightness(93%)
+         contrast(93%);
+}  
 
 .bounce {
    animation-name: bounce;
@@ -49,13 +68,23 @@
 @keyframes bounce {
    0%   { transform: scale(1,1) translateY(0); }
    10%   { transform: scale(1,.9) translateY(0); }
-   30%  { transform: scale(1,1) translateY(-25px); }
+   30%  { transform: scale(1,1) translateY(-15%); }
    50%  { transform: scale(1,1) translateY(0); }
    100% { transform: scale(1,1) translateY(0); }
 }
 
+.blow-slow {
+   animation-name: blow-slow;
+   animation-timing-function: linear;
+}
+@keyframes blow-slow {
+   0%   { transform: scale(1,1) translateY(0); }
+   50%  { transform: scale(.9,.9) translateY(0); }
+   100% { transform: scale(1,1) translateY(0); }
+}
+
 .Welcome p {
-   width: 300px;
+   width: 310px;
    text-align: center;
 }
 
@@ -65,4 +94,132 @@
    background-color: #FDF4F2;
    opacity: .9;
    padding: 10px;
+}
+
+/* Weather */
+
+.hbox {
+   display: flex;
+}
+
+.vbox {
+   display: flex;
+   flex-direction: column;
+}
+
+.disabled {
+   color: #48586A;
+}
+
+#location {
+   text-align: center;
+   font-size: 1.8em;
+   margin-top: 25px;
+   margin-bottom: 15px;
+}
+
+#datetime {
+   text-align: center;
+   font-size: 1.1em;
+   margin-bottom: 25px;
+}
+
+#weather-main {
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+}
+
+#weather-icon {
+   width: 150px;
+   height: 150px;
+   background-size: 110%;
+   animation-iteration-count: infinite;
+   animation-duration: 4.2s;
+}
+
+#temp {
+   font-size: 4.6em;
+   text-align: center;
+   margin-bottom: 5px;
+}
+
+#desc {
+   font-size: 1.1em;
+   text-align: center;
+}
+
+#unit-toggle {
+   align-self: first baseline;
+   margin-left: 20px;
+}
+
+#unit-toggle span {
+   font-size: 1.9em;
+   margin-bottom: 5px;
+}
+
+#weather-details {
+   width: 100%;
+   justify-content: space-between;
+}
+
+#weather-details .vbox {
+   display: flex;
+   align-items: center;
+}
+
+.medium-icon {
+   height: 70px;
+   width: 70px;
+   background-size: 80%;
+   justify-self: center;
+}
+
+#visibility, #humidity, #wind {
+   text-align: center;
+   font-size: 1.4em;
+   color: #48586A;
+}
+
+/* Icons */
+
+.icons-sunny {
+   background-image: url("./icons/icons-sunny.svg");
+}
+.icons-stormy {
+   background-image: url("./icons/icons-stormy.svg");
+}
+.icons-snowy {
+   background-image: url("./icons/icons-snowy.svg");
+}
+.icons-rainy {
+   background-image: url("./icons/icons-rainy.svg");
+}
+.icons-rainy-2 {
+   background-image: url("./icons/icons-rainy-2.svg");
+}
+.icons-night-cloudy {
+   background-image: url("./icons/icons-night-cloudy.svg");
+}
+.icons-night-clear {
+   background-image: url("./icons/icons-night-clear.svg");
+}
+.icons-cloudy {
+   background-image: url("./icons/icons-cloudy.svg");
+}
+.icons-cloudy-2 {
+   background-image: url("./icons/icons-cloudy-2.svg");
+}
+.icons-cloudy-3 {
+   background-image: url("./icons/icons-cloudy-3.svg");
+}
+.icons-eye {
+   background-image: url("./icons/icons-eye.svg");
+}
+.icons-wind {
+   background-image: url("./icons/icons-wind.svg");
+}
+.icons-water {
+   background-image: url("./icons/icons-water.svg");
 }
