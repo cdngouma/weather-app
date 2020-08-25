@@ -28,7 +28,6 @@ function App() {
    }
 
    function getWeather(lat, lon) {
-      console.log(lat, lon);
       const API = `https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${lon}`;
       fetch(API)
          .then((response) => response.json())
