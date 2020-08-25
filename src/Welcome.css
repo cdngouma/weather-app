@@ -1,0 +1,51 @@
+.Weather {
+   justify-content: flex-end;
+}
+
+.Welcome {
+   justify-content: center;
+}
+
+.Welcome p {
+   width: 310px;
+   text-align: center;
+}
+
+.error {
+   color: #ED372A;
+   border: 1px solid #F89D98;
+   background-color: #FDF4F2;
+   opacity: .9;
+   padding: 10px;
+}
+
+.stage {
+   height: 170px;
+   display: flex;
+   justify-content: center;
+   margin: 20px auto 10px auto;
+}
+
+#logo {
+   width: 140px;
+   height: 140px;
+   background: url("./icons/icons-cloudy.svg");
+   animation-iteration-count: infinite;
+   animation-duration: 1.5s;
+   background-size: 100%;
+}
+
+#logo, #weather-icon {
+   filter: brightness(195%) !important;
+}
+
+.icon {
+   background-position: center;
+   background-repeat: no-repeat;
+   filter: invert(34%) 
+         sepia(11%) 
+         saturate(958%)
+         hue-rotate(172deg)
+         brightness(93%)
+         contrast(93%);
+}  

@@ -1,0 +1,135 @@
+#location {
+   text-align: center;
+   font-size: 1.8em;
+   margin-top: 25px;
+   margin-bottom: 15px;
+}
+
+#datetime {
+   text-align: center;
+   font-size: 1.1em;
+   margin-bottom: 35px;
+}
+
+#weather-main {
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+}
+
+#weather-icon {
+   width: 150px;
+   height: 150px;
+   background-size: 110%;
+   animation-iteration-count: infinite;
+   animation-duration: 4.2s;
+}
+
+#temp {
+   font-size: 4.6em;
+   text-align: center;
+   margin-bottom: 5px;
+}
+
+#desc {
+   font-size: 1.1em;
+   text-align: center;
+}
+
+#unit-toggle {
+   padding: 0;
+   margin-left: 25px;
+   align-self: flex-start;
+}
+
+#unit-toggle label {
+   list-style: none;
+   font-size: 1.9em;
+   margin-bottom: 5px;
+   cursor: pointer;
+}
+
+#unit-toggle input[type="radio"] {
+   display: none;
+}
+
+#unit-toggle input[type="radio"]+label {
+   color: #48586A;
+}
+
+#unit-toggle input[type="radio"]:checked+label {
+   color: #fff;
+}
+
+#weather-details {
+   width: 100%;
+   justify-content: space-between;
+}
+
+#weather-details .vbox {
+   display: flex;
+   align-items: center;
+}
+
+#weather-details .vbox {
+   width: 100px;
+}
+
+.medium-icon {
+   height: 70px;
+   width: 70px;
+   background-size: 80%;
+   justify-self: center;
+}
+
+#visibility, #humidity, #wind {
+   text-align: center;
+   font-size: 1.4em;
+   color: #48586A;
+}
+
+@media (max-width: 450px) {
+   .App {
+      background-color: #131521;
+   }
+
+   .Welcome, .Weather {
+      width: 90%;
+      padding-left: 0;
+      padding-right: 0;
+   }
+
+   .medium-icon {
+      width: 60px;
+   }
+}
+
+@media (max-width: 375px) {
+   #temp {
+      font-size: 4em;
+   }
+}
+
+@media (max-width: 360px) {
+   #temp {
+      font-size: 3.5em;
+   }
+}
+
+@media (max-width: 280px) {
+   #temp {
+      font-size: 2.9em;
+   }
+
+   #unit-toggle label {
+      font-size: 1.3em;
+   }
+
+   #desc {
+      font-size: .9em;
+   }
+
+   #visibility, #humidity, #wind {
+      font-size: 1.18em;
+   }
+}

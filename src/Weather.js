@@ -1,4 +1,5 @@
 import React from 'react';
+import './Weather.css';
 
 function Weather(props) {
    const iconClass = props.iconClass;
