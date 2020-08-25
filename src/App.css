@@ -16,7 +16,7 @@
 
 .Welcome, .Weather {
    background-color: #131521;
-   width: 400px;
+   width: 360px;
    height: 350px;
    padding: 50px;
    align-items: center;
@@ -117,7 +117,7 @@
 #datetime {
    text-align: center;
    font-size: 1.1em;
-   margin-bottom: 25px;
+   margin-bottom: 35px;
 }
 
 #weather-main {
@@ -165,8 +165,6 @@
 #unit-toggle input[type="radio"]+label {
    color: #48586A;
 }
-
-
 
 #unit-toggle input[type="radio"]:checked+label {
    color: #fff;
@@ -239,4 +237,50 @@
 }
 .icons-water {
    background-image: url("./icons/icons-water.svg");
+}
+
+@media (max-width: 450px) {
+   .App {
+      background-color: #131521;
+   }
+
+   .Welcome, .Weather {
+      width: 90%;
+      padding-left: 0;
+      padding-right: 0;
+   }
+
+   .medium-icon {
+      width: 60px;
+   }
+}
+
+@media (max-width: 375px) {
+   #temp {
+      font-size: 4em;
+   }
+}
+
+@media (max-width: 360px) {
+   #temp {
+      font-size: 3.5em;
+   }
+}
+
+@media (max-width: 280px) {
+   #temp {
+      font-size: 2.9em;
+   }
+
+   #unit-toggle label {
+      font-size: 1.3em;
+   }
+
+   #desc {
+      font-size: .9em;
+   }
+
+   #visibility, #humidity, #wind {
+      font-size: 1.18em;
+   }
 }
