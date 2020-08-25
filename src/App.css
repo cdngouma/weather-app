@@ -107,10 +107,6 @@
    flex-direction: column;
 }
 
-.disabled {
-   color: #48586A;
-}
-
 #location {
    text-align: center;
    font-size: 1.8em;
@@ -150,13 +146,30 @@
 }
 
 #unit-toggle {
-   align-self: first baseline;
-   margin-left: 20px;
+   padding: 0;
+   margin-left: 25px;
+   align-self: flex-start;
 }
 
-#unit-toggle span {
+#unit-toggle label {
+   list-style: none;
    font-size: 1.9em;
    margin-bottom: 5px;
+   cursor: pointer;
+}
+
+#unit-toggle input[type="radio"] {
+   display: none;
+}
+
+#unit-toggle input[type="radio"]+label {
+   color: #48586A;
+}
+
+
+
+#unit-toggle input[type="radio"]:checked+label {
+   color: #fff;
 }
 
 #weather-details {
@@ -167,6 +180,10 @@
 #weather-details .vbox {
    display: flex;
    align-items: center;
+}
+
+#weather-details .vbox {
+   width: 100px;
 }
 
 .medium-icon {

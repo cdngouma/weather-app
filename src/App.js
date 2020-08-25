@@ -8,13 +8,13 @@ function App() {
    const [location, setLocation] = React.useState();
    const [weather, setWeather] = React.useState();
    const [updatedAt, setUpdatedAt] = React.useState();
+   const [unitSystem, setUnitSystem] = React.useState("isu");
    const [errorMessage, setErrorMessage] = React.useState();
 
    React.useEffect(getLocation, []);
 
    function getLocation() {
       if(navigator.geolocation) {
-         console.log('get location');
          navigator.geolocation.getCurrentPosition((position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
@@ -23,7 +23,7 @@ function App() {
             setErrorMessage("Please, enable geolocation to use this app");
          });
       } else {
-         setErrorMessage("Geolocation is not supported by this browser");
+         setErrorMessage("Geolocation is not supported by this device");
       }
    }
 
@@ -40,15 +40,28 @@ function App() {
             // Set location
             const location = `${data.name}, ${data.sys.country}`;
             setLocation(location);
-            // Set weather information (in metrics)
+            // Set weather information (in isus)
             let weatherData = {};
             weatherData["type"] = data.weather[0].main;
             weatherData["description"] = data.weather[0].description;
-            weatherData["temp"] = Math.round(data.main.temp * 10) / 10;
-            weatherData["humidity"] = Math.round(data.main.humidity * 10) / 10;
-            weatherData["windSpeed"] = Math.round(data.wind.speed * 10) / 10;
-            weatherData["visibility"] = Math.round(data.visibility * 10) / 10;
-            weatherData["iconPath"] = getIconClass(data.weather[0].main, data.weather[0].description);
+            weatherData["temp"] = {
+               "isu": Math.round(data.main.temp*10)/10,
+               "uscs": Math.round((data.main.temp*9/5 + 32)*10)/10
+            };
+            weatherData["windSpeed"] = {
+               "isu": Math.round(data.wind.speed*10)/10 + "km/h",
+               "uscs": Math.round(data.wind.speed/1.609*10)/10 + "mph"
+            }
+            weatherData["visibility"] = {
+               "isu": Math.round(data.visibility*10)/10 + "km",
+               "uscs": Math.round(data.visibility/1.609*10)/10 + "mi"
+            }
+
+            weatherData["humidity"] = Math.round(data.main.humidity*10)/10 + "%";
+
+            const today = new Date();
+            const isNight = today >= data.sys.sunset || today <= data.sys.sunrise;
+            weatherData["iconPath"] = getIconClass(data.weather[0].main, isNight);
 
             setWeather(weatherData);
 
@@ -57,6 +70,12 @@ function App() {
          .catch((error) => {
             setErrorMessage("Failed to get weather");
          });
+   }
+
+   function toggleUnitSystem(event) {
+      if(event.target.checked) {
+         setUnitSystem(event.target.value);
+      }
    }
 
    function getCurrentDatetime() {
@@ -80,13 +99,13 @@ function App() {
       return `${mm}/${dd}/${yyyy} ${h}:${m} ${meridiam}`;
    }
 
-   function getIconClass(desc, detail) {
-      console.log(desc, detail);
-      desc = desc.toLowerCase();
-      switch (desc) {
+   function getIconClass(desc, isNight) {
+      switch (desc.toLowerCase()) {
          case "clouds":
+            if (isNight) return "icons-night-cloudy";
             return "icons-cloudy";
          case "clear":
+            if (isNight) return "icons-night-clear"
             return "icons-sunny";
          case "rain":
             return "icons-rainy-2";
@@ -109,12 +128,10 @@ function App() {
             ) : (
                <Weather location={ location }
                         iconClass={ weather.iconPath } 
-                        desc={ weather.description}
-                        temp={ weather.temp }
-                        humidity={ weather.humidity }
-                        windSpeed={ weather.windSpeed }
-                        visibility={ weather.visibility }
-                        updatedAt={ updatedAt } />
+                        weather={ weather }
+                        unitSystem={ unitSystem }
+                        updatedAt={ updatedAt } 
+                        toggle={ toggleUnitSystem }/>
             )
          }
          <p id="author">Coded by <a href="https://github.com/cdngouma" target="blank_">cdngouma</a>.</p>
