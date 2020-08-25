@@ -58,9 +58,8 @@ function App() {
 
             weatherData["humidity"] = Math.round(data.main.humidity*10)/10 + "%";
 
-            const today = new Date();
-            const isNight = today >= data.sys.sunset || today <= data.sys.sunrise;
-            weatherData["iconPath"] = getIconClass(data.weather[0].main, isNight);
+            const now = (new Date()).getHours();
+            weatherData["iconPath"] = getIconClass(data.weather[0].main, (now<=5 || now>=19));
 
             setWeather(weatherData);
 
