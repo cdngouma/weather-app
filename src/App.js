@@ -52,8 +52,8 @@ function App() {
                "uscs": Math.round(data.wind.speed/1.609*10)/10 + "mph"
             }
             weatherData["visibility"] = {
-               "isu": Math.round(data.visibility*10)/10 + "km",
-               "uscs": Math.round(data.visibility/1.609*10)/10 + "mi"
+               "isu": Math.round(data.visibility/1000*10)/10 + "km",
+               "uscs": Math.round(data.visibility/1000/1.609*10)/10 + "mi"
             }
 
             weatherData["humidity"] = Math.round(data.main.humidity*10)/10 + "%";
